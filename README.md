@@ -1,5 +1,3 @@
-# Work in progress: NOT READY TO USE.
-
 # vue-light-gallery
 A zero-dependency (standalone) VueJS lightweight image gallery for both mobile and desktop browsers.
 
@@ -82,6 +80,14 @@ Vue.component('LightGallery', VueLightGallery);
 | disableScroll       | Boolean   | false                                           | Disable the scroll            |
 | background          | String    | rgba(0, 0, 0, 0.8)                              | Main container background     |
 | interfaceColor      | String    | rgba(255, 255, 255, 0.8)                        | Icons color                   |
+
+
+## Events
+
+| Name                | Params              | Description                                     |
+| --------------------|:--------------------| ------------------------------------------------|
+| close               |                     | Triggered when the lightbox is closed           |
+| slide               | { index: Number }   | Triggered when the image change (next or prev)  |
 
 
 ## Usage with Nuxt
