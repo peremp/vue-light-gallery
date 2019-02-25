@@ -1,0 +1,7 @@
+.eslintrc.js
+.gitignore
+.npmignore
+.git/
+build/
+example/
+yarn.lock
