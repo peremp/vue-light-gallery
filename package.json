@@ -1,0 +1,52 @@
+{
+  "name": "vue-light-gallery",
+  "version": "0.1.0",
+  "description": "VueJS lightweight image gallery for both mobile and desktop browsers.",
+  "author": "Pere Monfort <24bitjs@gmail.com>",
+  "license": "MIT",
+  "main": "dist/vue-light-gallery.js",
+  "unpkg": "dist/vue-light-gallery.min.js",
+  "browser": {
+    "./sfc": "src/light-gallery.vue"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production rollup --config build/rollup.config.js && NODE_ENV=production BUILD_MODE=minify rollup --config build/rollup.config.js",
+    "lint": "eslint ./",
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peremp/vue-light-gallery.git"
+  },
+  "keywords": [
+    "vue-light-gallery-",
+    "vuejs-light-gallery",
+    "gallery",
+    "images",
+    "lightbox",
+    "lightweight",
+    "mobile",
+    "responsive",
+    "tough",
+    "vue",
+    "vuejs",
+    "vue-component",
+    "vue-plugin"
+  ],
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.14.1",
+    "eslint-plugin-vue": "^5.2.2",
+    "node-sass": "^4.11.0",
+    "rollup": "^1.2.2",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-vue": "^4.7.2",
+    "vue": "^2.6.7",
+    "vue-template-compiler": "^2.6.7"
+  }
+}
