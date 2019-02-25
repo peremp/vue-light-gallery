@@ -24,12 +24,12 @@ npm install vue-light-gallery
 ```html
 <template>
   <div>
-    <light-gallery
+    <LightGallery
       :images="images"
       :index="index"
       :disable-scroll="true"
       @close="index = null"
-    ></light-gallery>
+    ></LightGallery>
     <ul>
       <li
         v-for="(image, imageIndex) in images"
@@ -43,11 +43,11 @@ npm install vue-light-gallery
 </template>
 
 <script>
-  import VueLightGallery from 'vue-light-gallery';
+  import LightGallery from 'vue-light-gallery';
 
   export default {
     components: {
-      'light-gallery': VueLightGallery,
+      LightGallery,
     },
     data() {
       return {
@@ -70,7 +70,7 @@ Or you can install it globally:
 import Vue from 'vue'
 import VueLightGallery from 'vue-light-gallery'
 
-Vue.component('light-gallery', VueLightGallery);
+Vue.component('LightGallery', VueLightGallery);
 ```
 
 ## Props
@@ -86,4 +86,26 @@ Vue.component('light-gallery', VueLightGallery);
 
 ## Usage with Nuxt
 
-Wrap it in Nuxt's [`no-ssr` component](https://nuxtjs.org/api/components-no-ssr/).
+Create the plugin `lightGallery.client.js`:
+
+```js
+import Vue from 'vue';
+import VueLightGallery from 'vue-light-gallery';
+
+Vue.component('LightGallery', VueLightGallery);
+```
+
+Add the plugin to nuxt.config.js:
+
+```
+plugins: [
+  '~/plugins/lightGallery.client.js',
+],
+```
+
+Wrap the component in Nuxt's [`no-ssr` component](https://nuxtjs.org/api/components-no-ssr/).
+```html
+<no-ssr>
+  <LightGallery ... />
+</no-ssr>
+```
