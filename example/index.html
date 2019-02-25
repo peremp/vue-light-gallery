@@ -4,6 +4,18 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
   <script src="../dist/vue-light-gallery.js" charset="utf-8"></script>
   <title>Vue Gallery</title>
+  <style>
+    ul { list-style: none; padding: 0; margin: 0; }
+    .thumb {
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      margin: 10px;
+      background-size: cover;
+      background-position: center center;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,19 +27,23 @@
     :disable-scroll="true"
     @close="index = null"
   ></light-gallery>
-  <img
-    v-for="(thumb, imageIndex) in thumbnails"
-    :key="imageIndex"
-    :src="thumb"
-    style="padding: 4px; cursor: pointer;"
-    @click="index = imageIndex"
-  />
+  <ul>
+    <li
+      v-for="(image, imageIndex) in images"
+      :key="imageIndex"
+      class="thumb"
+      :style="`background-image: url(${image})`"
+      @click="index = imageIndex"
+    />
+  </ul>
 </div>
 
 <script type="text/javascript">
-  Vue.use(VueLightGallery);
   new Vue({
     el: '#app',
+    components: {
+      'light-gallery': VueLightGallery
+    },
     data: function () {
       return {
         images: [
@@ -35,12 +51,6 @@
           'http://lorempixel.com/800/1200/nature/2/',
           'http://lorempixel.com/1000/1000/nature/3/',
           'http://lorempixel.com/1000/1000/nature/4/'
-        ],
-        thumbnails: [
-          'http://lorempixel.com/150/150/nature/1/',
-          'http://lorempixel.com/150/150/nature/2/',
-          'http://lorempixel.com/150/150/nature/3/',
-          'http://lorempixel.com/150/150/nature/4/'
         ],
         index: null
       };

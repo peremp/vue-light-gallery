@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.VueLightGallery = {}));
-}(this, function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.VueLightGallery = factory());
+}(this, function () { 'use strict';
 
   //
   //
@@ -403,29 +403,6 @@
       undefined
     );
 
-  function install(Vue) {
-  	if (install.installed) { return; }
-  	install.installed = true;
-  	Vue.component('LightGallery', LightGallery);
-  }
-
-  var plugin = {
-  	install: install,
-  };
-
-  var GlobalVue = null;
-  if (typeof window !== 'undefined') {
-  	GlobalVue = window.Vue;
-  } else if (typeof global !== 'undefined') {
-  	GlobalVue = global.Vue;
-  }
-  if (GlobalVue) {
-  	GlobalVue.use(plugin);
-  }
-
-  exports.install = install;
-  exports.default = LightGallery;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
+  return LightGallery;
 
 }));
