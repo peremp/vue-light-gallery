@@ -1,6 +1,6 @@
 {
   "name": "vue-light-gallery",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "VueJS lightweight image gallery for both mobile and desktop browsers.",
   "author": "Pere Monfort <24bitjs@gmail.com>",
   "license": "MIT",
