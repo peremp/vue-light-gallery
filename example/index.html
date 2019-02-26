@@ -29,7 +29,12 @@
   ></light-gallery>
   <ul>
     <li
-      v-for="(image, imageIndex) in images"
+      v-for="(image, imageIndex) in [
+        'http://lorempixel.com/500/500/nature/1/',
+        'http://lorempixel.com/500/500/nature/2/',
+        'http://lorempixel.com/500/500/nature/3/',
+        'http://lorempixel.com/500/500/nature/4/'
+      ]"
       :key="imageIndex"
       class="thumb"
       :style="`background-image: url(${image})`"

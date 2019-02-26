@@ -11,6 +11,25 @@
         class="light-gallery__modal"
         :style="`background: ${background}`"
       >
+        <div
+          :style="`color: ${interfaceColor}`"
+          class="light-gallery__loading"
+        >
+          <div class="light-gallery__spinner">
+            <div
+              class="light-gallery__dot"
+              :style="`border-color: ${interfaceColor}`"
+            />
+            <div
+              class="light-gallery__dot"
+              :style="`border-color: ${interfaceColor}`"
+            />
+            <div
+              class="light-gallery__dot"
+              :style="`border-color: ${interfaceColor}`"
+            />
+          </div>
+        </div>
         <div class="light-gallery__container">
           <ul class="light-gallery__content">
             <li
@@ -251,13 +270,20 @@ export default {
     overflow: hidden;
   }
 
-  &__container {
+  &__container,
+  &__loading {
     position: absolute;
+    z-index: 1002;
     display: block;
     width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__loading {
+    z-index: 1003;
   }
 
   &__image {
@@ -275,6 +301,7 @@ export default {
       display: block;
       margin: 0 auto;
       max-width: 100%;
+      max-height: 100vh;
     }
   }
 
@@ -321,6 +348,44 @@ export default {
       height: 30px;
     }
   }
+
+  &__spinner {
+    &,
+    & * {
+      box-sizing: border-box;
+    }
+
+    & {
+      height: 15px;
+      width: calc(30px * 3);
+      margin: 0 auto;
+    }
+  }
+
+  &__dot {
+    & {
+      width: 15px;
+      height: 15px;
+      margin: 0 calc(15px / 2);
+      border: calc(15px / 5) solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      float: left;
+      transform: scale(0);
+      animation: spinner-animation 1000ms ease infinite 0ms;
+    }
+
+    &:nth-child(1) {
+      animation-delay: calc(300ms * 1);
+    }
+
+    &:nth-child(2) {
+      animation-delay: calc(300ms * 2);
+    }
+
+    &:nth-child(3) {
+      animation-delay: calc(300ms * 3);
+    }
+  }
 }
 .fade-enter-active, .fade-leave-active {
   position: fixed;
@@ -331,5 +396,15 @@ export default {
   position: fixed;
   opacity: 0;
   z-index: 1000;
+}
+
+@keyframes spinner-animation {
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
