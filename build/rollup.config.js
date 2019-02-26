@@ -1,5 +1,6 @@
 import vue from 'rollup-plugin-vue';
 import buble from 'rollup-plugin-buble';
+import cleanup from 'rollup-plugin-cleanup';
 import { terser } from 'rollup-plugin-terser';
 import commonjs from 'rollup-plugin-commonjs';
 
@@ -9,8 +10,7 @@ export default {
     input: 'src/wrapper.js',
     output: {
         name: 'VueLightGallery',
-        format: 'umd',
-        file: isMinify ? 'dist/vue-light-gallery.min.js' : 'dist/vue-light-gallery.js',
+        exports: 'named',
     },
     plugins: [
         commonjs(),
@@ -19,6 +19,7 @@ export default {
             compileTemplate: true,
         }),
         buble(),
-        (isMinify && terser())
+        cleanup(),
+        (isMinify && terser()),
     ],
 };

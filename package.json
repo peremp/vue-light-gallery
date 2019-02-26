@@ -4,13 +4,17 @@
   "description": "VueJS lightweight image gallery for both mobile and desktop browsers.",
   "author": "Pere Monfort <24bitjs@gmail.com>",
   "license": "MIT",
-  "main": "dist/vue-light-gallery.js",
-  "unpkg": "dist/vue-light-gallery.min.js",
+  "main": "dist/light-gallery.umd.js",
+  "module": "dist/light-gallery.esm.js",
+  "unpkg": "dist/light-gallery.min.js",
   "browser": {
     "./sfc": "src/light-gallery.vue"
   },
   "scripts": {
-    "build": "NODE_ENV=production rollup --config build/rollup.config.js && NODE_ENV=production BUILD_MODE=minify rollup --config build/rollup.config.js",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/light-gallery.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/light-gallery.esm.js",
+    "build:unpkg": "BUILD_MODE=minify rollup --config build/rollup.config.js --format iife --file dist/light-gallery.min.js",
     "lint": "eslint ./",
     "prepublish": "npm run build",
     "patch": "npm version patch",
@@ -51,5 +55,8 @@
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-vue": "^4.7.2",
     "vue-template-compiler": "^2.6.7"
+  },
+  "dependencies": {
+    "rollup-plugin-cleanup": "^3.1.1"
   }
 }
