@@ -41,12 +41,12 @@ npm install vue-light-gallery
 </template>
 
 <script>
+  import Vue from 'vue';
   import LightGallery from 'vue-light-gallery';
 
+  Vue.use(LightGallery);
+
   export default {
-    components: {
-      LightGallery,
-    },
     data() {
       return {
         images: [
@@ -60,15 +60,6 @@ npm install vue-light-gallery
     },
   };
 </script>
-```
-
-Or you can install it globally:
-
-```js
-import Vue from 'vue'
-import VueLightGallery from 'vue-light-gallery'
-
-Vue.component('LightGallery', VueLightGallery);
 ```
 
 ## Props
@@ -98,7 +89,7 @@ Create the plugin `lightGallery.client.js`:
 import Vue from 'vue';
 import VueLightGallery from 'vue-light-gallery';
 
-Vue.component('LightGallery', VueLightGallery);
+Vue.use(VueLightGallery);
 ```
 
 Add the plugin to nuxt.config.js:

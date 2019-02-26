@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
-  <script src="../dist/vue-light-gallery.js" charset="utf-8"></script>
+  <script src="../dist/vue-light-gallery.umd.js" charset="utf-8"></script>
   <title>Vue Gallery</title>
   <style>
     ul { list-style: none; padding: 0; margin: 0; }
@@ -39,11 +39,10 @@
 </div>
 
 <script type="text/javascript">
+  Vue.use(VueLightGallery);
+
   new Vue({
     el: '#app',
-    components: {
-      'light-gallery': VueLightGallery
-    },
     data: function () {
       return {
         images: [

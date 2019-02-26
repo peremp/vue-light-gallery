@@ -4,17 +4,17 @@
   "description": "VueJS lightweight image gallery for both mobile and desktop browsers.",
   "author": "Pere Monfort <24bitjs@gmail.com>",
   "license": "MIT",
-  "main": "dist/light-gallery.umd.js",
-  "module": "dist/light-gallery.esm.js",
-  "unpkg": "dist/light-gallery.min.js",
+  "main": "dist/vue-light-gallery.umd.js",
+  "module": "dist/vue-light-gallery.esm.js",
+  "unpkg": "dist/vue-light-gallery.min.js",
   "browser": {
     "./sfc": "src/light-gallery.vue"
   },
   "scripts": {
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/light-gallery.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/light-gallery.esm.js",
-    "build:unpkg": "BUILD_MODE=minify rollup --config build/rollup.config.js --format iife --file dist/light-gallery.min.js",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-light-gallery.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-light-gallery.esm.js",
+    "build:unpkg": "BUILD_MODE=minify rollup --config build/rollup.config.js --format iife --file dist/vue-light-gallery.min.js",
     "lint": "eslint ./",
     "prepublish": "npm run build",
     "patch": "npm version patch",
