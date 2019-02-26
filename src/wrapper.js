@@ -2,27 +2,17 @@
 import LightGallery from '../src/light-gallery.vue';
 
 // Declare install function executed by Vue.use()
-export function install(Vue) {
+export function install(Vue, options = {}) {
 	if (install.installed) return;
 	install.installed = true;
-	Vue.component('LightGallery', LightGallery);
+	const { componentId = 'LightGallery' } = options;
+	Vue.component(componentId, LightGallery);
 }
 
-// Create module definition for Vue.use()
-const plugin = {
+// Module definition for Vue.use()
+export default {
 	install,
 };
 
-// Auto-install when vue is found (eg. in browser via <script> tag)
-let GlobalVue = null;
-if (typeof window !== 'undefined') {
-	GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
-	GlobalVue = global.Vue;
-}
-if (GlobalVue) {
-	GlobalVue.use(plugin);
-}
-
 // To allow use as module (npm/webpack/etc.) export component
-export default LightGallery;
+export { LightGallery };

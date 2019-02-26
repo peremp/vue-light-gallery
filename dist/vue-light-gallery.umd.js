@@ -419,26 +419,20 @@
       undefined
     );
 
-  function install(Vue) {
+  function install(Vue, options) {
+  	if ( options === void 0 ) options = {};
   	if (install.installed) { return; }
   	install.installed = true;
-  	Vue.component('LightGallery', LightGallery);
+  	var componentId = options.componentId; if ( componentId === void 0 ) componentId = 'LightGallery';
+  	Vue.component(componentId, LightGallery);
   }
-  var plugin = {
+  var wrapper = {
   	install: install,
   };
-  var GlobalVue = null;
-  if (typeof window !== 'undefined') {
-  	GlobalVue = window.Vue;
-  } else if (typeof global !== 'undefined') {
-  	GlobalVue = global.Vue;
-  }
-  if (GlobalVue) {
-  	GlobalVue.use(plugin);
-  }
 
   exports.install = install;
-  exports.default = LightGallery;
+  exports.default = wrapper;
+  exports.LightGallery = LightGallery;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
