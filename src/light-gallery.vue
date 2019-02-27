@@ -12,23 +12,20 @@
         :style="`background: ${background}`"
       >
         <div
-          :style="`color: ${interfaceColor}`"
-          class="light-gallery__loading"
+          :class="['light-gallery__spinner', !isImageLoaded || 'hide']"
         >
-          <div class="light-gallery__spinner">
-            <div
-              class="light-gallery__dot"
-              :style="`border-color: ${interfaceColor}`"
-            />
-            <div
-              class="light-gallery__dot"
-              :style="`border-color: ${interfaceColor}`"
-            />
-            <div
-              class="light-gallery__dot"
-              :style="`border-color: ${interfaceColor}`"
-            />
-          </div>
+          <div
+            class="light-gallery__dot"
+            :style="`border-color: ${interfaceColor}`"
+          />
+          <div
+            class="light-gallery__dot"
+            :style="`border-color: ${interfaceColor}`"
+          />
+          <div
+            class="light-gallery__dot"
+            :style="`border-color: ${interfaceColor}`"
+          />
         </div>
         <div class="light-gallery__container">
           <ul class="light-gallery__content">
@@ -36,11 +33,13 @@
               v-for="(image, imageIndex) in images"
               :key="imageIndex"
               :style="`transform: translate3d(${currentIndex * -100}%, 0px, 0px);`"
-              class="light-gallery__image"
+              class="light-gallery__image-container"
             >
               <img
-                v-if="preload(imageIndex)"
-                :src="images[imageIndex]"
+                :ref="`lg-img-${imageIndex}`"
+                class="light-gallery__image"
+                :src="shouldPreload(imageIndex) ? images[imageIndex] : false"
+                @load="imageLoaded($event, imageIndex)"
               >
             </li>
           </ul>
@@ -145,6 +144,7 @@ export default {
   data() {
     return {
       currentIndex: this.index,
+      isImageLoaded: false,
       bodyOverflowStyle: document.body.style.overflow,
       touch: {
         count: 0,
@@ -155,7 +155,6 @@ export default {
       },
     };
   },
-  computed: {},
   watch: {
     index(val) {
       this.currentIndex = val;
@@ -166,6 +165,9 @@ export default {
         document.body.style.overflow = this.bodyOverflowStyle;
       }
     },
+    currentIndex(val) {
+      this.setImageLoaded(val);
+    }
   },
   mounted() {
     this.bindEvents();
@@ -190,10 +192,27 @@ export default {
       this.currentIndex += 1;
       this.$emit('slide', { index: this.currentIndex });
     },
-    preload(imageIndex) {
-      return imageIndex === this.currentIndex
-       || imageIndex === this.currentIndex - 1
-       || imageIndex === this.currentIndex + 1;
+    imageLoaded($event, imageIndex) {
+      const target = $event.target;
+      target.classList.add('light-gallery__image--loaded');
+      this.setImageLoaded(imageIndex);
+    },
+    getImageElByIndex(index) {
+      const elements = this.$refs[`lg-img-${index}`] || [];
+      return elements[0];
+    },
+    setImageLoaded(index) {
+      const el = this.getImageElByIndex(index);
+      this.isImageLoaded = !el ? false : el.classList.contains('light-gallery__image--loaded');
+    },
+    shouldPreload(index) {
+      const el = this.getImageElByIndex(index) || {};
+      const src = el.src;
+
+      return !!src
+       || index === this.currentIndex
+       || index === this.currentIndex - 1
+       || index === this.currentIndex + 1;
     },
     bindEvents() {
       document.addEventListener('keydown', this.keyDownHandler, false);
@@ -270,8 +289,7 @@ export default {
     overflow: hidden;
   }
 
-  &__container,
-  &__loading {
+  &__container {
     position: absolute;
     z-index: 1002;
     display: block;
@@ -282,26 +300,28 @@ export default {
     text-align: center;
   }
 
-  &__loading {
-    z-index: 1003;
+  &__image-container {
+    display: inline-table;
+    vertical-align: middle;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: left .4s ease, transform .4s ease, -webkit-transform .4s ease;
   }
 
   &__image {
     & {
-      display: inline-table;
-      vertical-align: middle;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: left .4s ease, transform .4s ease, -webkit-transform .4s ease;
-    }
-
-    img {
       display: block;
       margin: 0 auto;
       max-width: 100%;
       max-height: 100vh;
+      transition: opacity .2s;
+      opacity: 0;
+    }
+
+    &--loaded {
+      opacity: 1;
     }
   }
 
@@ -350,27 +370,35 @@ export default {
   }
 
   &__spinner {
-    &,
-    & * {
+    & {
+      position: absolute;
+      z-index: 1003;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0 auto;
+      display: block;
+      height: 15px;
+      width: auto;
       box-sizing: border-box;
+      text-align: center;
     }
 
-    & {
-      height: 15px;
-      width: calc(30px * 3);
-      margin: 0 auto;
+    &.hide {
+      display: none;
     }
   }
 
   &__dot {
     & {
+      float: left;
+      margin: 0 calc(15px / 2);
       width: 15px;
       height: 15px;
-      margin: 0 calc(15px / 2);
       border: calc(15px / 5) solid rgba(255, 255, 255, 0.8);
       border-radius: 50%;
-      float: left;
       transform: scale(0);
+      box-sizing: border-box;
       animation: spinner-animation 1000ms ease infinite 0ms;
     }
 
@@ -387,12 +415,14 @@ export default {
     }
   }
 }
+
 .fade-enter-active, .fade-leave-active {
   position: fixed;
   z-index: 1000;
   transition: opacity .2s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.fade-enter, .fade-leave-to {
   position: fixed;
   opacity: 0;
   z-index: 1000;
