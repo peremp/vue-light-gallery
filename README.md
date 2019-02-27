@@ -1,7 +1,10 @@
 # vue-light-gallery
-A zero-dependency (standalone) VueJS lightweight image gallery for both mobile and desktop browsers.
+VueJS lightweight image gallery for both mobile and desktop browsers.
 
-Inspired by BaguetteBox.js
+- Standalone: Zero-dependencies
+- Responsive
+- Lazy load of next/prev images
+- Loading spinner
 
 ## License
 
@@ -50,10 +53,10 @@ npm install vue-light-gallery
     data() {
       return {
         images: [
-          'https://dummyimage.com/800/ffffff/000000',
-          'https://dummyimage.com/1600/ffffff/000000',
-          'https://dummyimage.com/1280/000000/ffffff',
-          'https://dummyimage.com/400/000000/ffffff',
+          'https://picsum.photos/1200/800?image=1024',
+          'https://picsum.photos/1000/1000?image=935',
+          'https://picsum.photos/800/1200?image=1003',
+          'https://picsum.photos/1200/800?image=937',
         ],
         index: null,
       };
@@ -62,7 +65,7 @@ npm install vue-light-gallery
 </script>
 ```
 
-You can change the component id doing:
+You can change the component id by doing:
 
 ```html
 <template>
@@ -123,3 +126,7 @@ Wrap the component in Nuxt's [`no-ssr` component](https://nuxtjs.org/api/compone
   <LightGallery ... />
 </no-ssr>
 ```
+
+## Allusions
+- Inspired by [BaguetteBox](https://github.com/feimosi/baguetteBox.js)
+- Spinner extracted from  [epic-spinners](https://github.com/epicmaxco/epic-spinners)
