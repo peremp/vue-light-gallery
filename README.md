@@ -1,10 +1,13 @@
 # vue-light-gallery
 VueJS lightweight image gallery for both mobile and desktop browsers.
 
-- Standalone: Zero-dependencies
+- Zero-dependencies
 - Responsive
+- Swipe & Keyboard events
 - Lazy load of next/prev images
 - Loading spinner
+
+![](example/vue-light-image.gif)
 
 ## License
 
