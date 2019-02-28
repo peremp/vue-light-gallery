@@ -6,41 +6,22 @@
   <script src="../dist/vue-light-gallery.umd.js" charset="utf-8"></script>
   <title>Vue Gallery</title>
   <style>
+    body { font-family: Sans-serif; padding-top: 50px; }
     ul { list-style: none; padding: 0; margin: 0; }
-    .thumb {
-      display: inline-block;
-      height: 150px;
-      width: 150px;
-      margin: 10px;
-      background-size: cover;
-      background-position: center center;
-      cursor: pointer;
-    }
-    p {
-      margin: 10px;
-      padding: 0;
-      font-family: Sans-serif;
-    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .thumb { display: inline-block; margin: 10px; cursor: pointer; }
   </style>
 </head>
 
 <body>
 
-<div id="app">
+<div id="app" class="container">
   <light-gallery
     :images="images"
     :index="index"
     :disable-scroll="true"
     @close="index = null"
   ></light-gallery>
-  <p>
-    For demo purposes the selected images have its <strong>Cache-control</strong>
-    set to <em>"no-cache, no-store"</em> in order the force the image load each
-    time the lightbox is opened.
-  </p>
-  <p>
-    In a normal environment images will only load once.
-  </p>
   <ul>
     <!-- Thumbnails -->
     <li
@@ -52,9 +33,10 @@
       ]"
       :key="imageIndex"
       class="thumb"
-      :style="`background-image: url(${image})`"
       @click="index = imageIndex"
-    />
+    >
+      <img :src="image">
+    </li>
   </ul>
 </div>
 
@@ -66,10 +48,22 @@
     data: function () {
       return {
         images: [
-          'https://picsum.photos/1200/800?image=1024',
-          'https://picsum.photos/1000/1000?image=935',
-          'https://picsum.photos/800/1200?image=1003',
-          'https://picsum.photos/1200/800?image=937',
+          {
+            title: 'Big vulture flying',
+            url: 'https://picsum.photos/1200/800?image=1024',
+          },
+          {
+            title: 'Frog soak on water',
+            url: 'https://picsum.photos/1000/1000?image=935',
+          },
+          {
+            title: 'Fawn in warm autumn sun',
+            url: 'https://picsum.photos/800/1200?image=1003',
+          },
+          {
+            title: 'Mountain goat on the rocks',
+            url: 'https://picsum.photos/1200/800?image=937',
+          },
         ],
         index: null
       };

@@ -30,17 +30,25 @@
         <div class="light-gallery__container">
           <ul class="light-gallery__content">
             <li
-              v-for="(image, imageIndex) in images"
+              v-for="(image, imageIndex) in formattedImages"
               :key="imageIndex"
               :style="`transform: translate3d(${currentIndex * -100}%, 0px, 0px);`"
               class="light-gallery__image-container"
             >
-              <img
-                :ref="`lg-img-${imageIndex}`"
-                class="light-gallery__image"
-                :src="shouldPreload(imageIndex) ? images[imageIndex] : false"
-                @load="imageLoaded($event, imageIndex)"
-              >
+              <div class="light-gallery__image">
+                <div
+                  v-show="image.title && isImageLoaded"
+                  class="light-gallery__text"
+                  :style="`background: ${background}; color: ${interfaceColor}`"
+                >
+                  {{ image.title }}
+                </div>
+                <img
+                  :ref="`lg-img-${imageIndex}`"
+                  :src="shouldPreload(imageIndex) ? image.url : false"
+                  @load="imageLoaded($event, imageIndex)"
+                >
+              </div>
             </li>
           </ul>
         </div>
@@ -155,6 +163,13 @@ export default {
       },
     };
   },
+  computed: {
+    formattedImages() {
+      return this.images.map(image => (typeof image === 'string'
+        ? { url: image } : image
+      ));
+    },
+  },
   watch: {
     index(val) {
       this.currentIndex = val;
@@ -167,7 +182,7 @@ export default {
     },
     currentIndex(val) {
       this.setImageLoaded(val);
-    }
+    },
   },
   mounted() {
     this.bindEvents();
@@ -193,8 +208,8 @@ export default {
       this.$emit('slide', { index: this.currentIndex });
     },
     imageLoaded($event, imageIndex) {
-      const target = $event.target;
-      target.classList.add('light-gallery__image--loaded');
+      const { target } = $event;
+      target.classList.add('loaded');
       this.setImageLoaded(imageIndex);
     },
     getImageElByIndex(index) {
@@ -203,11 +218,11 @@ export default {
     },
     setImageLoaded(index) {
       const el = this.getImageElByIndex(index);
-      this.isImageLoaded = !el ? false : el.classList.contains('light-gallery__image--loaded');
+      this.isImageLoaded = !el ? false : el.classList.contains('loaded');
     },
     shouldPreload(index) {
       const el = this.getImageElByIndex(index) || {};
-      const src = el.src;
+      const { src } = el;
 
       return !!src
        || index === this.currentIndex
@@ -286,7 +301,6 @@ export default {
     white-space: nowrap;
     padding: 0;
     margin: 0;
-    overflow: hidden;
   }
 
   &__container {
@@ -312,17 +326,38 @@ export default {
 
   &__image {
     & {
-      display: block;
+      display: inline-block;
+      position: relative;
       margin: 0 auto;
       max-width: 100%;
       max-height: 100vh;
-      transition: opacity .2s;
-      opacity: 0;
+      // opacity: 0;
     }
 
-    &--loaded {
-      opacity: 1;
+    & img {
+      & {
+        max-width: 100%;
+        max-height: 100vh;
+        opacity: 0;
+        transition: opacity .2s;
+      }
+
+      &.loaded{
+        opacity: 1;
+      }
     }
+
+  }
+
+  &__text {
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    display: block;
+    margin: 0 auto;
+    padding: 15px 30px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   &__next,
