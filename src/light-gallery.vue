@@ -210,7 +210,10 @@ export default {
     imageLoaded($event, imageIndex) {
       const { target } = $event;
       target.classList.add('loaded');
-      this.setImageLoaded(imageIndex);
+
+      if (imageIndex === this.currentIndex) {
+        this.setImageLoaded(imageIndex);
+      }
     },
     getImageElByIndex(index) {
       const elements = this.$refs[`lg-img-${index}`] || [];
