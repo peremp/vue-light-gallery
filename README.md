@@ -59,10 +59,10 @@ npm install vue-light-gallery
     data() {
       return {
         images: [
-          'https://picsum.photos/1200/800?image=1024',
-          'https://picsum.photos/1000/1000?image=935',
-          'https://picsum.photos/800/1200?image=1003',
-          'https://picsum.photos/1200/800?image=937',
+          { title:'img 1', url: 'https://picsum.photos/1200/800?image=1024' },
+          { title:'img 2', url: 'https://picsum.photos/1000/1000?image=935' },
+          { title:'img 3', url: 'https://picsum.photos/800/1200?image=1003' },
+          { title:'img 4', url: 'https://picsum.photos/1200/800?image=937' },
         ],
         index: null,
       };
@@ -92,12 +92,32 @@ Vue.use(VueLightGallery, { componentId: 'custom-gallery' });
 
 | Props               | Type      | Default                                         | Description                   |
 | --------------------|:----------| ------------------------------------------------|-------------------------------|
-| images              | Array     | []                                              | List of URLs                  |
+| images              | Array     | []                                              | List of Images                |
 | index               | Number    | null                                            | index of the displayed image  |
 | disableScroll       | Boolean   | false                                           | Disable the scroll            |
 | background          | String    | rgba(0, 0, 0, 0.8)                              | Main container background     |
 | interfaceColor      | String    | rgba(255, 255, 255, 0.8)                        | Icons color                   |
 
+
+### Images definition
+
+Without title: `Array.<string>`
+```js
+  const images = [
+    'http://url.com/img1.jpg',
+    'http://url.com/img2.jpg',
+  ];
+```
+
+With title: `Array.<Object>`
+```js
+  const images = [
+    { title: 'image 1', url: 'http://url.com/img1.jpg' },
+    { title: 'image 2', url: 'http://url.com/img2.jpg' },
+  ];
+```
+
+The title will only appear if `Object.title` property is defined.
 
 ## Events
 
