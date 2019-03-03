@@ -1,10 +1,12 @@
 # vue-light-gallery
 VueJS lightweight image gallery for both mobile and desktop browsers.
 
-- Standalone: Zero-dependencies
-- Responsive
-- Lazy load of next/prev images
-- Loading spinner
+- Standalone: Zero-dependencies.
+- Fully responsive.
+- Keyboard and Touch support.
+- Multiple galleries on one page.
+- Lazy & smart image preloading.
+- Color customization.
 
 ## License
 
@@ -86,7 +88,7 @@ Vue.use(VueLightGallery, { componentId: 'custom-gallery' });
 
 | Props               | Type      | Default                                         | Description                   |
 | --------------------|:----------| ------------------------------------------------|-------------------------------|
-| images              | Array     | []                                              | Urls list                     |
+| images              | Array     | []                                              | List of URLs                  |
 | index               | Number    | null                                            | index of the displayed image  |
 | disableScroll       | Boolean   | false                                           | Disable the scroll            |
 | background          | String    | rgba(0, 0, 0, 0.8)                              | Main container background     |

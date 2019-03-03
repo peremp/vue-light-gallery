@@ -58,10 +58,14 @@
           :style="`background: ${background}`"
           @click="prev()"
         >
-          <svg>
+          <svg
+            width="25"
+            height="40"
+            viewBox="0 0 25 40"
+          >
             <polyline
-              points="30 10 10 30 30 50"
-              stroke-width="4"
+              points="19 5 5 20 19 35"
+              stroke-width="3"
               stroke-linecap="butt"
               fill="none"
               stroke-linejoin="round"
@@ -75,10 +79,14 @@
           :style="`background: ${background}`"
           @click="next()"
         >
-          <svg>
+          <svg
+            width="25"
+            height="40"
+            viewBox="0 0 25 40"
+          >
             <polyline
-              points="14 10 34 30 14 50"
-              stroke-width="4"
+              points="6 5 20 20 6 35"
+              stroke-width="3"
               stroke-linecap="butt"
               fill="none"
               stroke-linejoin="round"
@@ -96,7 +104,7 @@
             height="30"
           >
             <g
-              stroke-width="4"
+              stroke-width="3"
               :stroke="interfaceColor"
             >
               <line
@@ -358,7 +366,7 @@ export default {
     bottom: 0;
     display: block;
     margin: 0 auto;
-    padding: 15px 30px;
+    padding: 12px 30px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -373,13 +381,8 @@ export default {
     border: 0;
     line-height: 0;
     outline: none;
-    padding: 0;
+    padding: 7px;
     cursor: pointer;
-
-    & svg {
-      width: 44px;
-      height: 60px;
-    }
   }
 
   &__next {
@@ -396,15 +399,8 @@ export default {
   }
 
   &__close {
-    & {
-      right: 0;
-      padding: 20px;
-    }
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
+    right: 0;
+    padding: 12px;
   }
 
   &__spinner {
