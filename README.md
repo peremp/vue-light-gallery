@@ -8,6 +8,10 @@ VueJS lightweight image gallery for both mobile and desktop browsers.
 - Lazy & smart image preloading.
 - Color customization.
 
+## Demo
+
+[View Demo](https://peremp.github.io/vue-light-gallery/index.html)
+
 ## License
 
 MIT License
