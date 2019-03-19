@@ -53,7 +53,7 @@ npm install vue-light-gallery
   import Vue from 'vue';
   import LightGallery from 'vue-light-gallery';
 
-  Vue.use(VueLightGallery);
+  Vue.use(LightGallery);
 
   export default {
     data() {
