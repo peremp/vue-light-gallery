@@ -161,7 +161,7 @@ export default {
     return {
       currentIndex: this.index,
       isImageLoaded: false,
-      bodyOverflowStyle: document.body.style.overflow,
+      bodyOverflowStyle: '',
       touch: {
         count: 0,
         x: 0,
@@ -180,6 +180,8 @@ export default {
   },
   watch: {
     index(val) {
+      if (!document) return;
+
       this.currentIndex = val;
 
       if (this.disableScroll && typeof val === 'number') {
@@ -193,9 +195,14 @@ export default {
     },
   },
   mounted() {
+    if (!document) return;
+
+    this.bodyOverflowStyle = document.body.style.overflow;
     this.bindEvents();
   },
   beforeDestroy() {
+    if (!document) return;
+
     if (this.disableScroll) {
       document.body.style.overflow = this.bodyOverflowStyle;
     }
