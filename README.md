@@ -27,7 +27,7 @@ npm install vue-light-gallery
 ```
 
 ## Usage
-
+### As a local component
 ```html
 <template>
   <div>
@@ -36,33 +36,35 @@ npm install vue-light-gallery
       :index="index"
       :disable-scroll="true"
       @close="index = null"
-    ></LightGallery>
+    />
     <ul>
       <li
-        v-for="(image, imageIndex) in images"
-        :key="imageIndex"
-        class="thumb"
-        :style="`background-image: url(${image})`"
-        @click="index = imageIndex"
-      />
+        v-for="(thumb, thumbIndex) in [
+          'path/to/thumb_1.jpeg',
+          'path/to/thumb_2.jpeg',
+        ]"
+        :key="thumbIndex"
+        @click="index = thumbIndex"
+      >
+        <img :src="thumb">
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
   import Vue from 'vue';
-  import LightGallery from 'vue-light-gallery';
-
-  Vue.use(VueLightGallery);
+  import { LightGallery } from 'vue-light-gallery';
 
   export default {
+    components: {
+      LightGallery,
+    },
     data() {
       return {
         images: [
-          { title:'img 1', url: 'https://picsum.photos/1200/800?image=1024' },
-          { title:'img 2', url: 'https://picsum.photos/1000/1000?image=935' },
-          { title:'img 3', url: 'https://picsum.photos/800/1200?image=1003' },
-          { title:'img 4', url: 'https://picsum.photos/1200/800?image=937' },
+          { title:'img 1', url: 'path/to/image_1.jpg' },
+          { title:'img 2', url: 'path/to/image_2.jpg' },
         ],
         index: null,
       };
@@ -71,22 +73,45 @@ npm install vue-light-gallery
 </script>
 ```
 
-You can change the component id by doing:
+### As a Global component
+```js
+// Your APP entry point.
+// F.E: index.js
+import Vue from 'vue';
+import LightGallery from 'vue-light-gallery';
 
+Vue.use(LightGallery);
+
+new Vue(/* ... */);
+```
 ```html
+<!-- Component.vue -->
 <template>
   ...
-  <custom-gallery ... />
+    <LightGallery ...props />
   ...
 </template>
-<script>
+```
+Or if you want to change the component id:
+```js
+// Your APP entry point.
+// F.E: index.js
 import Vue from 'vue';
 import LightGallery from 'vue-light-gallery';
 
 Vue.use(VueLightGallery, { componentId: 'custom-gallery' });
-</script>
+
+new Vue(/* ... */);
 ```
 
+```html
+<!-- Component.vue -->
+<template>
+  ...
+    <custom-gallery ...props />
+  ...
+</template>
+```
 
 ## Props
 
@@ -101,7 +126,7 @@ Vue.use(VueLightGallery, { componentId: 'custom-gallery' });
 
 ### Images definition
 
-Without title: `Array.<string>`
+Without title: `Array<string>`
 ```js
   const images = [
     'http://url.com/img1.jpg',
@@ -109,7 +134,7 @@ Without title: `Array.<string>`
   ];
 ```
 
-With title: `Array.<Object>`
+With title: `Array<Object>`
 ```js
   const images = [
     { title: 'image 1', url: 'http://url.com/img1.jpg' },
@@ -138,7 +163,7 @@ import VueLightGallery from 'vue-light-gallery';
 Vue.use(VueLightGallery);
 ```
 
-Add the plugin to nuxt.config.js:
+Add the plugin to `nuxt.config.js`:
 
 ```
 plugins: [
