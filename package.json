@@ -49,12 +49,12 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
     "node-sass": "^4.12.0",
-    "rollup": "^1.2.2",
+    "rollup": "^1.11.3",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-cleanup": "^3.1.1",
-    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-vue": "^4.7.2",
+    "rollup-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.7"
   }
 }
