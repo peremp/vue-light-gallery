@@ -73,6 +73,61 @@ npm install vue-light-gallery
 </script>
 ```
 
+### As a local component (TypeScript class-style)
+```html
+<template>
+    <div>
+        <LightGallery
+            :images="images"
+            :index="index"
+            :disable-scroll="true"
+            @close="index = null"/>
+    <ul>
+        <li
+            v-for="(thumb, thumbIndex) in [
+            'path/to/thumb_1.jpeg',
+            'path/to/thumb_2.jpeg',
+            ]"
+            :key="thumbIndex"
+            @click="index = thumbIndex">
+            <img :src="thumb">
+        </li>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts">
+    import Vue from 'vue';
+    import { Component } from 'vue-property-decorator';
+    import { LightGallery } from 'vue-light-gallery';
+
+    interface Images {
+        title: string;
+        url: string;
+    }
+    const image: Images[] = [
+        {
+            title: 'img 1',
+            url: 'path/to/image_1.jpg',
+        },
+        {
+            title: 'img 2',
+            url: 'path/to/image_2.jpg',
+        },
+    ];
+
+    @Component({
+        components: {
+            LightGallery,
+        },
+    })
+    export default class TestLightGallery extends Vue {
+        private images: Images[] = image;
+        private index: number | null = null;
+    }
+</script>
+```
+
 ### As a Global component
 ```js
 // Your APP entry point.
