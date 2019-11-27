@@ -2,7 +2,7 @@
 VueJS lightweight image gallery for both mobile and desktop browsers.
 
 - Standalone: Zero-dependencies.
-- Fully responsive.
+- Responsive LayOut, but does not support responsive images.
 - Keyboard and Touch support.
 - Multiple galleries on one page.
 - Lazy & smart image preloading.
