@@ -40,9 +40,8 @@
                   v-show="image.title && isImageLoaded"
                   class="light-gallery__text"
                   :style="`background: ${background}; color: ${interfaceColor}`"
-                >
-                  {{ image.title }}
-                </div>
+                  v-html="image.title"
+                ></div>
                 <img
                   :ref="`lg-img-${imageIndex}`"
                   :src="shouldPreload(imageIndex) ? image.url : false"
