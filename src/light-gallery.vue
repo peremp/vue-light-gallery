@@ -55,6 +55,7 @@
         <button
           v-if="currentIndex > 0"
           class="light-gallery__prev"
+          type="button"
           :style="`background: ${background}`"
           @click="prev()"
         >
@@ -76,6 +77,7 @@
         <button
           v-if="currentIndex + 1 < images.length"
           class="light-gallery__next"
+          type="button"
           :style="`background: ${background}`"
           @click="next()"
         >
@@ -96,6 +98,7 @@
         </button>
         <button
           class="light-gallery__close"
+          type="button"
           :style="`background: ${background}`"
           @click="close()"
         >
