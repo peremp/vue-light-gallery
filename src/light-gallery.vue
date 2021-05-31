@@ -45,7 +45,8 @@
                 </div>
                 <img
                   :ref="`lg-img-${imageIndex}`"
-                  :src="shouldPreload(imageIndex) ? image.url : false"
+                  :src="shouldPreload(imageIndex) && image.url ? image.url : false"
+                  :srcset="shouldPreload(imageIndex) && image.urls ? image.urls : false"
                   @load="imageLoaded($event, imageIndex)"
                 >
               </div>
