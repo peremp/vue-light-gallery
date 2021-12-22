@@ -88,7 +88,9 @@ new Vue(/* ... */);
 <!-- Component.vue -->
 <template>
   ...
-    <LightGallery ...props />
+    <LightGallery ...props >
+        Slot content
+    </LightGallery>    
   ...
 </template>
 ```
