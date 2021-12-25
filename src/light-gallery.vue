@@ -122,6 +122,7 @@
             </g>
           </svg>
         </button>
+        <slot></slot>
       </div>
     </div>
   </transition>
