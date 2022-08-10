@@ -34,8 +34,10 @@
               :key="imageIndex"
               :style="`transform: translate3d(${currentIndex * -100}%, 0px, 0px);`"
               class="light-gallery__image-container"
+              @click="closeOnTap && close()"
             >
-              <div class="light-gallery__image">
+              <div class="light-gallery__image"
+                @click.stop="">
                 <div
                   v-show="image.title && isImageLoaded"
                   class="light-gallery__text"
@@ -56,7 +58,7 @@
           v-if="currentIndex > 0"
           class="light-gallery__prev"
           :style="`background: ${background}`"
-          @click="prev()"
+          @click.stop="prev()"
         >
           <svg
             width="25"
@@ -77,7 +79,7 @@
           v-if="currentIndex + 1 < images.length"
           class="light-gallery__next"
           :style="`background: ${background}`"
-          @click="next()"
+          @click.stop="next()"
         >
           <svg
             width="25"
@@ -156,6 +158,10 @@ export default {
       type: String,
       default: 'rgba(255, 255, 255, 0.8)',
     },
+    closeOnTap: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
